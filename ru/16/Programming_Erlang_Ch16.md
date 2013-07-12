@@ -44,13 +44,10 @@ J2EE контейнере.
 внутренностей.
 
 Вот план этой главы:
-
-Написание маленькой клиент-серверной программы на Erlang.
-
-Постепенная «генерализация» этой программы и добавление новых
+ 1. Написание маленькой клиент-серверной программы на Erlang.
+ 2. Постепенная «генерализация» этой программы и добавление новых
 возможностей.
-
-Переход к реальному коду.
+ 3. Переход к реальному коду.
 
 ####16.1 Путь к типичному (обобщенному) серверу (Generic Server)####
 
@@ -705,10 +702,10 @@ not_a_customer
 Ниже приведен шаблон для `init`:
 ```
 %%--------------------------------------------------------------------
-%% Function: init(Args) -> {ok, State} |
-%% {ok, State, Timeout} |
-%% ignore |
-%% {stop, Reason}
+%% Function: init(Args) -> 	{ok, State} |
+%% 							{ok, State, Timeout} |
+%%							ignore |
+%% 							{stop, Reason}
 %% Description: Initiates the server
 %%--------------------------------------------------------------------
 init([]) ->
@@ -732,16 +729,16 @@ init([]) ->
 %%----------------------------------------------------------------------
 %% Function:
 %% handle_call(Request, From, State) -> {reply, Reply, State} |
-%% {reply, Reply, State, Timeout} |
-%% {noreply, State} |
-%% {noreply, State, Timeout} |
-%% {stop, Reason, Reply, State} |
-%% {stop, Reason, State}
+%% 										{reply, Reply, State, Timeout} |
+%% 										{noreply, State} |
+%% 										{noreply, State, Timeout} |
+%% 										{stop, Reason, Reply, State} |
+%% 										{stop, Reason, State}
 %% Description: Handling call messages
 %%----------------------------------------------------------------------
 handle_call(_Request, _From, State) ->
-  Reply = ok,
-  {reply, Reply, State}.
+	Reply = ok,
+	{reply, Reply, State}.
 ```
 `Request` (второй аргумент `gen_server:call/2`) станет первым аргумент
 `handle_call/3`. `From` – это PID, запрашивающего клиентского процесса, а
@@ -769,12 +766,12 @@ procedure call)*. `gen_server:cast(Name, Name)` реализация *образ
 ```
 %%--------------------------------------------------------------------
 %% Function: handle_cast(Msg, State) -> {noreply, NewState} |
-%% {noreply, NewState, Timeout} |
-%% {stop, Reason, NewState}
-%% Description: Handling cast messages
+%% 										{noreply, NewState, Timeout} |
+%% 										{stop, Reason, NewState}
+%% 										Description: Handling cast messages
 %%--------------------------------------------------------------------
 handle_cast(_Msg, State) ->
-  {noreply, NewState}.
+	{noreply, NewState}.
 ```
 Обработчик обычно возвращает `{noreply, NewState}`, который меняет
 состояние сервера или `{stop, ...}`, который останавливает сервер.
@@ -793,8 +790,8 @@ handle_cast(_Msg, State) ->
 ```
 %%--------------------------------------------------------------------
 %% Function: handle_info(Info, State) -> {noreply, State} |
-%% {noreply, State, Timeout} |
-%% {stop, Reason, State}
+%% 										 {noreply, State, Timeout} |
+%%										 {stop, Reason, State}
 %% Description: Handling all non-call/cast messages
 %%--------------------------------------------------------------------
 handle_info(_Info, State) ->
@@ -1028,10 +1025,6 @@ code_change(_OldVsn, State, Extra) -> {ok, State}.
 значением `noreply` и и делегировать ответ другому процессу. Информацию об
 этом вы можете прочитать в главе *"Принципы дизайна"* и в руководстве по
 модулям `sys` и `proc_lib`.
-
-
-
-
 
 
 
