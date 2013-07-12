@@ -117,7 +117,7 @@ my_handler(Fun) ->
     receive
     {add, Fun1} ->
         my_handler(Fun1);
- {event, Any} ->
+	{event, Any} ->
 	    (catch Fun(Any)),
 	    my_handler(Fun)
     end.
@@ -256,7 +256,7 @@ too_hot() ->
 ```
 Отправить сообщение об ошибке регистратору ошибок.
 ```
-    1> error_logger:error_msg("An error has occurred\\n").
+    1> error_logger:error_msg("An error has occurred\n").
     =ERROR REPORT==== 28-Mar-2007::10:46:28 ===
     An error has occurred
     ok
@@ -269,7 +269,7 @@ too_hot() ->
 как и для `io:format(Format, Data)`.
 
 ```
-2> error_logger:error_msg("\~s, an error has occurred\\n", ["Joe"]).
+2> error_logger:error_msg("\~s, an error has occurred\n", ["Joe"]).
 =ERROR REPORT==== 28-Mar-2007::10:47:09 ===
 Joe, an error has occurred
 ok
@@ -376,7 +376,7 @@ Eshell V5.5.3 (abort with \^G)
 ошибке:
 
 ```
-1> error_logger:error_msg("This is an error\\n").
+1> error_logger:error_msg("This is an error\n").
 =ERROR REPORT==== 27-Mar-2007::11:53:08 ===
 This is an error
 ok
@@ -439,7 +439,7 @@ ok
 
 ```
 $ erl -boot start_sasl -config elog1
-1> error_logger:error_msg("This is an error\\n").
+1> error_logger:error_msg("This is an error\n").
 =ERROR REPORT==== 27-Mar-2007::11:53:08 ===
 This is an error
 ok
@@ -465,7 +465,7 @@ ok
 
 ```
 $ erl -boot start_sasl -config elog2
-1> error_logger:error_msg("This is an error\\n").
+1> error_logger:error_msg("This is an error\n").
 =ERROR REPORT==== 27-Mar-2007::11:53:08 ===
 This is an error ok
 ```
@@ -507,7 +507,7 @@ supervisor: {local,sasl_safe_sup}
         ]}].
 
 $erl -boot start_sasl -config elog3
-1> error_logger:error_msg("This is an error\\n").
+1> error_logger:error_msg("This is an error\n").
 =ERROR REPORT==== 28-Mar-2007::11:36:19 ===
 This is an error
 false
